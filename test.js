@@ -29,17 +29,21 @@ t('jpg', async t => {
 	t.end()
 })
 
-t.only('bmp', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.jpg'))
+t('bmp', async t => {
+	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
 
-	t.ok(await eq(data, fix, {tol: 0.04}))
+	data = decode(encode(data, 'bmp'))
 
-	t.equal(data.width, fix.width)
-	t.equal(data.height, fix.height)
+	for (let i = 0; i < data.length; i++) {
+		if (data[i] !== fix.data[i]) console.log(i, data[i], fix.data[i])
+	}
+
+	var out = {}
+	t.ok(await eq(data, fix, out))
 	t.end()
 })
 
-t('gif', async t => {
+t.only('gif', async t => {
 	let data = decode(fs.readFileSync('./fixture/test_pattern.gif'))
 
 	t.ok(await eq(data, fix))

@@ -9,6 +9,9 @@ module.exports = encode
 function encode (data, type, o) {
   if (isObj(type)) o = type
   if (!o) o = {}
+  else if (Array.isArray(o)) o = { width: o[0], height: o[1] }
+
+  if (o.shape) o.width = o.shape[0], o.height = o.shape[1]
 
   if (!o.width) o.width = data.shape ? data.shape[0] : data.width
   if (!o.height) o.height = data.shape ? data.shape[1] : data.height
@@ -30,9 +33,9 @@ encode['image/jpeg'] =
 encode['image/jpg'] =
 encode['jpg'] =
 encode['jpeg'] = require('./jpg')
-// encode['bmp'] =
-// encode['image/bmp'] =
-// encode['image/bitmap'] = require('./bmp')
+encode['bmp'] =
+encode['image/bmp'] =
+encode['image/bitmap'] = require('./bmp')
 // encode['tiff'] =
 // encode['image/tiff'] = require('./tiff')
 // encode['webp'] =
