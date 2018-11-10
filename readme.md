@@ -17,15 +17,16 @@ fs.writeFileSync(
 
 ## API
 
-### `let data = encode(pixels, type, options?)`
+### `let data = encode(pixels, type?, options?)`
 
 Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an ArrayBuffer with encoded `data` in target mime `type`, one of `png`, `gif`, `tif`, `bmp`, `jpg`.
 
 `options` can provide:
 
+* `type`, if not specified as a separate argument
 * `width`, if not defined by `pixels`
 * `height`, if not defined by `pixels`
-* `quality`
+* `quality`, 0..1
 * rest of meta fields for encoder
 
 ## See also

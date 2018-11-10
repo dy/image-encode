@@ -9,7 +9,7 @@ let eq = require('image-equal')
 
 var PNG = require('pngjs').PNG
 
-t.only('png', async t => {
+t('png', async t => {
 	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
 
 	data = decode(encode(data, 'png'), 'png')
@@ -20,16 +20,16 @@ t.only('png', async t => {
 })
 
 t('jpg', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.jpg'))
+	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
 
-	t.ok(await eq(data, fix, {tol: 0.04}))
+	data = decode(encode(data, 'jpg'))
 
-	t.equal(data.width, fix.width)
-	t.equal(data.height, fix.height)
+	var out = {}
+	t.ok(await eq(data, fix, out, { tolerance: .04 }))
 	t.end()
 })
 
-t('bmp', async t => {
+t.only('bmp', async t => {
 	let data = decode(fs.readFileSync('./fixture/test_pattern.jpg'))
 
 	t.ok(await eq(data, fix, {tol: 0.04}))

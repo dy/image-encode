@@ -2,22 +2,18 @@
 'use strict'
 
 var jpeg = require('jpeg-js')
-var b2u8 = require('buffer-to-uint8array')
+var toab = require('to-array-buffer')
 
 module.exports = read
 
 function read (data, o) {
-	var jpegData = jpeg.decode(data)
-
-	if(!jpegData) {
-		throw new Error("Error decoding jpeg")
+	var rawImageData = {
+		data: Buffer.from(data),
+		width: o.width,
+		height: o.height
 	}
+	var jpegImageData = jpeg.encode(rawImageData, (o.quality || .92) * 100)
 
-	var pixels = b2u8(jpegData.data)
-	pixels.data = pixels.subarray()
-	pixels.height = jpegData.height
-	pixels.width = jpegData.width
-
-	return pixels
+	return toab(jpegImageData.data)
 }
 
