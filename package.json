@@ -1,0 +1,44 @@
+{
+  "name": "image-encode",
+  "version": "1.0.0",
+  "description": "Decode image data into any format: gif, jpeg, png, tiff or bmp",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dy/image-encode.git"
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "keywords": [
+    "image",
+    "image-encode",
+    "get-pixels",
+    "image-decode",
+    "image-pixels",
+    "pixels"
+  ],
+  "author": "dy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dy/image-encode/issues"
+  },
+  "homepage": "https://github.com/dy/image-encode#readme",
+  "devDependencies": {
+    "brfs": "^2.0.1",
+    "image-decode": "^1.0.0",
+    "image-equal": "^3.1.0",
+    "tape": "^4.9.1"
+  },
+  "dependencies": {
+    "image-type": "^3.0.0",
+    "is-plain-obj": "^1.1.0",
+    "pngjs": "^3.3.3",
+    "to-array-buffer": "^2.1.0"
+  }
+}
