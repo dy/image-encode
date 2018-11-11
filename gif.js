@@ -1,45 +1,59 @@
 // decode gif buffer
 'use strict'
 
-var GifReader = require('omggif').GifReader
+var GifWriter = require('omggif').GifWriter
+var toab = require('to-array-buffer')
 
 module.exports = function read (data, o) {
-	var reader = new GifReader(Buffer.from(data))
+	if (o.loop == null) o.loop = 0
+	if (o.delay == null) o.delay = 0
+	// if (o.dithering == null) o.dithering = null
 
-	// TODO: handle multiframe gif
-	// if(reader.numFrames() > 0) {
-	// 	var nshape = [reader.numFrames(), reader.height, reader.width, 4]
-	// 	try  {
-	// 	  var ndata = new Uint8Array(nshape[0] * nshape[1] * nshape[2] * nshape[3])
-	// 	} catch(err) {
-	// 	  cb(err)
-	// 	  return
-	// 	}
+	let i = 0
+    let length = o.width * o.height * 4
+    let palette = {}
+    let paletteArray = []
 
-	// 	var result = ndarray(ndata, nshape)
-	// 	try {
-	// 	  for(var i=0; i < reader.numFrames(); ++i) {
-	// 	    reader.decodeAndBlitFrameRGBA(i, ndata.subarray(
-	// 	      result.index(i, 0, 0, 0),
-	// 	      result.index(i+1, 0, 0, 0)))
-	// 	  }
-	// 	} catch(err) {
-	// 	  cb(err)
-	// 	  return
-	// 	}
+    let pxData = new Uint8Array(data)
 
-	// 	cb(null, result.transpose(0,2,1))
-	// }
+    while (i < length) {
+		let r = pxData[i++]
+		let g = pxData[i++]
+		let b = pxData[i++]
+		let id = r << 16 | g << 8 | b
+		if (!palette[id]) {
+			palette[id] = paletteArray.length
+			paletteArray.push(id)
+		}
+		i++
+    }
 
-	// single frame gif
-	var pixels = new Uint8Array(reader.width * reader.height * 4)
+	let pixels = new Uint8Array(o.width * o.height)
+    if (paletteArray.length <= 256) {
+		paletteArray.length = 256
+		let k = 0, p = 0
 
-	reader.decodeAndBlitFrameRGBA(0, pixels)
+		while(k < length) {
+			let r = pxData[k++]
+			let g = pxData[k++]
+			let b = pxData[k++]
+			let index = r << 16 | g << 8 | b
+			pixels[p] = palette[index]
+			k++, p++
+		}
 
-	pixels.width = reader.width
-	pixels.height = reader.height
-	pixels.data = pixels.subarray()
+		o.palette = new Uint32Array(paletteArray)
+    }
+    else {
+    	throw Error('More than 256 colors is not supported for now')
+    }
 
-	return pixels
+	var frames = 1
+
+	var buf = new Uint8Array(o.width * o.height * frames + 1024)
+	var gf = new GifWriter(buf, o.width, o.height, o)
+	gf.addFrame(0, 0, o.width, o.height, pixels)
+
+	return toab(buf.slice(0, gf.end()))
 }
 

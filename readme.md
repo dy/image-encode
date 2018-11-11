@@ -1,6 +1,6 @@
 # image-encode [![unstable](https://img.shields.io/badge/stability-unstable-green.svg)](http://github.com/badges/stability-badges) [![Build Status](https://img.shields.io/travis/dy/image-encode.svg)](https://travis-ci.org/dy/image-encode)
 
-Encode pixel data to an image format: PNG, GIF, BMP, JPEG or TIFF.
+Encode image data to a container: PNG, GIF, BMP, JPEG or TIFF.
 
 ## Usage
 
@@ -11,21 +11,21 @@ let encode = require('image-encode')
 
 // create a file with chess pattern
 fs.writeFileSync(
-	encode([0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255], {type: 'png', width: 2, height: 2})
+	encode([0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255], [2, 2], 'png')
 )
 ```
 
 ## API
 
-### `let data = encode(pixels, type?, shape|options?)`
+### `let data = encode(pixels, shape?, format|options?)`
 
-Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an ArrayBuffer with encoded `data` in target mime `type`, one of `png`, `gif`, `tif`, `bmp`, `jpg`.
+Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an ArrayBuffer with encoded `data` in target `format`, one of `png`, `gif`, `tif`, `bmp`, `jpg`.
 
 `options` can provide:
 
-* `type`, if not specified as a separate argument.
-* `width`, if not defined by `pixels`.
-* `height`, if not defined by `pixels`.
+* `format`, if not specified as a separate argument.
+* `width`, if not defined by `pixels` or `shape`.
+* `height`, if not defined by `pixels` or `shape`.
 * `quality`, 0..1.
 * rest of meta fields for encoder.
 
