@@ -67,7 +67,7 @@ t.skip('webp', async t => {
 	t.end()
 })
 
-t.only('tiff', async t => {
+t('tiff', async t => {
 	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
 
 	data = decode(encode(data, 'tif'))

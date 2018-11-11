@@ -1,4 +1,4 @@
-// decode png buffer
+// encode png buffer
 'use strict'
 
 
@@ -6,7 +6,7 @@ var PNG = require('pngjs').PNG
 var toab = require('to-array-buffer')
 var x = require('object-assign')
 
-module.exports = function read (data, o) {
+module.exports = function (data, o) {
 	o = x({
 		data: Buffer.from(data)
 	}, o)
