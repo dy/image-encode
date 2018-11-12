@@ -23,11 +23,11 @@ Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an A
 
 `options` can provide:
 
-* `format`, if not specified as a separate argument.
-* `width`, if not defined by `pixels` or `shape`.
-* `height`, if not defined by `pixels` or `shape`.
-* `quality`, 0..1.
-* rest of meta fields for encoder.
+* `format` or `type`, if not specified as a separate argument.
+* `shape` or `width`/`height`, if not defined by `pixels` or as a separate argument.
+* `quality` for JPG encoder.
+* `colors` for palette size in GIF encoder.
+* any other meta fields for encoders.
 
 ## See also
 
@@ -38,6 +38,6 @@ Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an A
 * [image-type](https://ghub.io/image-type) − detect input image data type.
 
 
-## Credits
+## Footer
 
 © 2018 Dmitry Yv. MIT License.

@@ -1,6 +1,6 @@
 'use strict'
 
-var toab = require('to-array-buffer')
+var u8 = require('to-uint8')
 var isObj = require('is-plain-obj')
 
 module.exports = encode
@@ -23,7 +23,7 @@ function encode (data, type, o) {
 
   if (!type || !encode[type]) throw new Error('Options must define valid encoder type')
 
-  return encode[type](toab(data), o)
+  return encode[type](u8(data).buffer, o)
 }
 
 encode['png'] =

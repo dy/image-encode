@@ -47,13 +47,11 @@ t('gif', async t => {
 	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
 
 	data = decode(encode(data, 'gif'))
+	t.ok(await eq(data, fix))
 
-	// for (let i = 0; i < data.length; i++) {
-	// 	if (data[i] !== fix.data[i]) console.log(i, data[i], fix.data[i])
-	// }
+	data = decode(encode(data, 'gif', {colors: 7}))
 
-	var out = {}
-	t.ok(await eq(data, fix, out))
+	t.ok(await eq(data, fix, {tol: .42}))
 	t.end()
 })
 
