@@ -6,11 +6,12 @@ let t = require('tape')
 let fix = require('./fixture')
 let fs = require('fs')
 let eq = require('image-equal')
+let pixels = require('image-pixels')
 
 var PNG = require('pngjs').PNG
 
 t('png', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
+	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'png'), 'png')
 
@@ -20,17 +21,18 @@ t('png', async t => {
 })
 
 t('jpg', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
+	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'jpg'))
 
 	var out = {}
-	t.ok(await eq(data, fix, out, { tolerance: .04 }))
+	t.ok(await eq(data, fix, out, { tolerance: .05 }))
+
 	t.end()
 })
 
 t('bmp', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
+	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'bmp'))
 
@@ -44,7 +46,7 @@ t('bmp', async t => {
 })
 
 t('gif', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
+	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'gif'))
 	t.ok(await eq(data, fix))
@@ -56,7 +58,7 @@ t('gif', async t => {
 })
 
 t.skip('webp', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.webp'))
+	let data = await pixels('./fixture/test_pattern.webp')
 
 	t.ok(await eq(data, fix))
 
@@ -66,7 +68,7 @@ t.skip('webp', async t => {
 })
 
 t('tiff', async t => {
-	let data = decode(fs.readFileSync('./fixture/test_pattern.png'))
+	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'tif'))
 

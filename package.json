@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "Decode image data into any format: gif, jpeg, png, tiff or bmp",
   "main": "index.js",
+  "browser": "browser.js",
   "scripts": {
     "test": "node test"
   },
@@ -45,6 +46,7 @@
     "object-assign": "^4.1.1",
     "omggif": "^1.0.9",
     "pngjs": "^3.3.3",
+    "to-array-buffer": "^3.0.0",
     "to-uint8": "^1.3.1",
     "utif": "^2.0.1"
   }

@@ -2,12 +2,14 @@
 'use strict'
 
 var bmp = require('bmp-js')
-var toab = require('to-array-buffer')
+var u8 = require('to-uint8')
 var x = require('object-assign')
+var toab = require('to-array-buffer')
 
 module.exports = function read (data, o) {
 	// convert RGBA → ABGR
-	var pixels = new Uint8Array(data)
+	var pixels = u8(data).slice()
+
 	for (var i = 0; i < pixels.length; i+=4) {
 		var red = pixels[i + 0]
 		var green = pixels[i + 1]
