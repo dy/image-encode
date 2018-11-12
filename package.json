@@ -34,6 +34,7 @@
     "brfs": "^2.0.1",
     "image-decode": "^1.0.0",
     "image-equal": "^3.1.0",
+    "image-pixels": "^2.0.2",
     "tape": "^4.9.1"
   },
   "dependencies": {

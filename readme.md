@@ -1,6 +1,6 @@
 # image-encode [![unstable](https://img.shields.io/badge/stability-unstable-green.svg)](http://github.com/badges/stability-badges) [![Build Status](https://img.shields.io/travis/dy/image-encode.svg)](https://travis-ci.org/dy/image-encode)
 
-Encode image data to a container: PNG, GIF, BMP, JPEG or TIFF.
+Encode image data to a container: PNG, GIF, BMP, JPEG or TIFF. Uses set of encoders in node and Canvas2D in browser.
 
 ## Usage
 
