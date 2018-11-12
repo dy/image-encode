@@ -1,6 +1,6 @@
 {
   "name": "image-encode",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Decode image data into any format: gif, jpeg, png, tiff or bmp",
   "main": "index.js",
   "browser": "browser.js",
