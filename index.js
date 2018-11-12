@@ -7,7 +7,10 @@ module.exports = encode
 
 
 function encode (data, type, o) {
-  if (isObj(type)) o = type
+  if (isObj(type)) {
+    o = type
+    type = null
+  }
   if (!o) o = {}
   else if (Array.isArray(o)) o = { width: o[0], height: o[1] }
   if (Array.isArray(type)) o.width = type[0], o.height = type[1], type = o.type

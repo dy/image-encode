@@ -72,9 +72,9 @@ t('tiff', async t => {
 
 	data = decode(encode(data, 'tif'))
 
-	for (let i = 0; i < data.length; i++) {
-		if (data[i] !== fix.data[i]) console.log(i, data[i], fix.data[i])
-	}
+	// for (let i = 0; i < data.length; i++) {
+	// 	if (data[i] !== fix.data[i]) console.log(i, data[i], fix.data[i])
+	// }
 
 	var out = {}
 	t.ok(await eq(data, fix, out))
@@ -84,6 +84,14 @@ t('tiff', async t => {
 t('undefined type', async t => {
 	let data = decode([0,0,0,0,0,0,0,0,0])
 	t.notOk(data)
+
+	t.end()
+})
+
+t('type in options', async t => {
+	let data = await pixels('./fixture/test_pattern.png')
+
+	encode(data, {type: 'png'})
 
 	t.end()
 })
