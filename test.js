@@ -26,7 +26,7 @@ t('jpg', async t => {
 	data = decode(encode(data, 'jpg'))
 
 	var out = {}
-	t.ok(await eq(data, fix, out, { tolerance: .05 }))
+	t.ok(await eq(data, fix, out, { tolerance: .45 }))
 
 	t.end()
 })
@@ -54,6 +54,9 @@ t('gif', async t => {
 	data = decode(encode(data, 'gif', {colors: 7}))
 
 	t.ok(await eq(data, fix, {tol: .42}))
+
+	encode([0,0,0,0], 'gif', [1,1])
+
 	t.end()
 })
 

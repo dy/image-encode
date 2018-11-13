@@ -31,6 +31,7 @@ Takes input `pixels` Array/TypedArray/ArrayBuffer/Buffer/ImageData, returns an A
 
 ## See also
 
+* [squoosh.app](https://github.com/GoogleChromeLabs/squoosh) − best in class image compressing app.
 * [image-decode](https://ghub.io/image-decode) − decode image data from a format.
 * [image-equal](https://ghub.io/image-equal) − image data comparing tool.
 * [image-pixels](https://ghub.io/image-pixels) − load or save pixel data from/to any source.

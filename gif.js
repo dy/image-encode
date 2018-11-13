@@ -12,12 +12,14 @@ module.exports = function read (data, o) {
 	if (o.dithering == null) o.dithering = null
 
 	// FIXME: max 256 colors is likely for GIF
-	var palette = getPalette(data, o.colors || 256)
+	o.colors = o.colors || 256
+	if (o.colors > 256) o.colors = 256
+	var palette = getPalette(data, o.colors)
 
 	o.palette = palette.colors.map(function (color) {
 		return color[0] << 16 | color[1] << 8 | color[2]
 	})
-	o.palette.length = nextPow2(o.palette.length)
+	o.palette.length = nextPow2(Math.max(o.palette.length, 2))
 	o.palette = new Uint32Array(o.palette)
 
 	var frames = 1

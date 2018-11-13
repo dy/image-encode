@@ -12,7 +12,7 @@ function read (data, o) {
 		width: o.width,
 		height: o.height
 	}
-	var jpegImageData = jpeg.encode(rawImageData, (o.quality || .92) * 100)
+	var jpegImageData = jpeg.encode(rawImageData, o.quality ? o.quality * 100 : null)
 
 	return toab(jpegImageData.data)
 }
