@@ -1,8 +1,8 @@
 'use strict'
 
 var isObj = require('is-plain-obj')
-var u8 = require('to-uint8')
-
+var pxls = require('pxls')
+var toab = require('to-array-buffer')
 
 module.exports = encode
 
@@ -10,7 +10,7 @@ module.exports = encode
 var canvas, context
 
 function encode (data, type, o) {
-  if (isObj(type)) o = type
+  if (isObj(type)) o = type, type = null
   if (!o) o = {}
   else if (Array.isArray(o)) o = { width: o[0], height: o[1] }
   if (Array.isArray(type)) o.width = type[0], o.height = type[1], type = o.type
@@ -33,12 +33,12 @@ function encode (data, type, o) {
   canvas.width = o.width
   canvas.height = o.height
   var idata = context.createImageData(o.width, o.height)
-  idata.data.set(u8(data))
+  idata.data.set(pxls(data))
   context.putImageData(idata, 0, 0)
 
   var dataURL = canvas.toDataURL(types[type], o.quality || 1)
 
-  return u8(dataURL).buffer
+  return toab(dataURL)
 }
 
 var types = {
