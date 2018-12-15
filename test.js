@@ -7,15 +7,30 @@ let fix = require('./fixture')
 let fs = require('fs')
 let eq = require('image-equal')
 let pixels = require('image-pixels')
+var del = require('del')
 
 var PNG = require('pngjs').PNG
+
+t('readme', async t => {
+	// create a file with chess pattern
+	fs.writeFileSync(
+		'x.png',
+		Buffer.from(encode([0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255], [2, 2], 'png'))
+	)
+
+	t.ok(eq(await pixels('./x.png'), [0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255]))
+
+	del('./x.png')
+
+	t.end()
+})
 
 t('png', async t => {
 	let data = await pixels('./fixture/test_pattern.png')
 
 	data = decode(encode(data, 'png'), 'png')
 
-	t.ok(await eq(data, fix))
+	t.ok(eq(data, fix))
 
 	t.end()
 })
@@ -26,7 +41,7 @@ t('jpg', async t => {
 	data = decode(encode(data, 'jpg'))
 
 	var out = {}
-	t.ok(await eq(data, fix, out, { tolerance: .45 }))
+	t.ok(eq(data, fix, out, { tolerance: .45 }))
 
 	t.end()
 })
@@ -41,7 +56,7 @@ t('bmp', async t => {
 	}
 
 	var out = {}
-	t.ok(await eq(data, fix, out))
+	t.ok(eq(data, fix, out))
 	t.end()
 })
 
@@ -53,7 +68,7 @@ t('gif', async t => {
 
 	data = decode(encode(data, 'gif', {colors: 7}))
 
-	t.ok(await eq(data, fix, {tol: .42}))
+	t.ok(eq(data, fix, {tol: .42}))
 
 	encode([0,0,0,0], 'gif', [1,1])
 
@@ -63,7 +78,7 @@ t('gif', async t => {
 t.skip('webp', async t => {
 	let data = await pixels('./fixture/test_pattern.webp')
 
-	t.ok(await eq(data, fix))
+	t.ok(eq(data, fix))
 
 	t.equal(data.width, fix.width)
 	t.equal(data.height, fix.height)
@@ -80,7 +95,7 @@ t('tiff', async t => {
 	// }
 
 	var out = {}
-	t.ok(await eq(data, fix, out))
+	t.ok(eq(data, fix, out))
 	t.end()
 })
 

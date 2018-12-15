@@ -27,9 +27,11 @@
   "homepage": "https://github.com/dy/image-encode#readme",
   "devDependencies": {
     "brfs": "^2.0.1",
+    "del": "^3.0.0",
     "image-decode": "^1.0.0",
-    "image-equal": "^3.1.0",
+    "image-equal": "^4.3.1",
     "image-pixels": "^2.0.2",
+    "save-file": "^2.1.1",
     "tape": "^4.9.1"
   },
   "dependencies": {
@@ -42,7 +44,7 @@
     "object-assign": "^4.1.1",
     "omggif": "^1.0.9",
     "pngjs": "^3.3.3",
-    "pxls": "^2.1.0",
+    "pxls": "^2.3.1",
     "to-array-buffer": "^3.0.0",
     "utif": "^2.0.1"
   }

@@ -11,7 +11,8 @@ let encode = require('image-encode')
 
 // create a file with chess pattern
 fs.writeFileSync(
-	encode([0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255], [2, 2], 'png')
+	'out.png',
+	Buffer.from(encode([0,0,0,255, 255,255,255,255, 255,255,255,255, 0,0,0,255], [2, 2], 'png'))
 )
 ```
 

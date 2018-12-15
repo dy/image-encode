@@ -11,7 +11,9 @@ function encode (data, type, o) {
     o = type
     type = null
   }
-  if (!o) o = {}
+
+  if (typeof o === 'string') o = {type: o}
+  else if (!o) o = {}
   else if (Array.isArray(o)) o = { width: o[0], height: o[1] }
   if (Array.isArray(type)) o.width = type[0], o.height = type[1], type = o.type
 
