@@ -39,7 +39,7 @@
     "image-palette": "^2.0.1",
     "image-type": "^3.0.0",
     "is-plain-obj": "^1.1.0",
-    "jpeg-js": "^0.3.4",
+    "jpeg-js": "^0.4.1",
     "next-pow-2": "^1.0.0",
     "object-assign": "^4.1.1",
     "omggif": "^1.0.9",
